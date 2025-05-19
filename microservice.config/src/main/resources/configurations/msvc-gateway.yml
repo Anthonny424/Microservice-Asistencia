@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: msvc-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: alumnos
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/v1/**
+        - id: media
+          uri: http://localhost:8090
+          predicates:
+            - Path=/media/**
+        - id: auth
+          uri: http://localhost:9090
+          predicates:
+            - Path=/api/auth/**
+

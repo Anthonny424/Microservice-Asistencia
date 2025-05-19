@@ -1,0 +1,15 @@
+package com.microservice.alumnos.service;
+
+import com.microservice.alumnos.dto.request.AlumnoCreateDTO;
+import com.microservice.alumnos.dto.response.AlumnoResponseDTO;
+import com.microservice.alumnos.model.Alumno;
+
+import java.util.List;
+
+public interface IAlumno {
+    List<AlumnoResponseDTO> getAllAlumnos();
+    Alumno findByDni(int dni);
+    List<Alumno> alumnosquefaltaronhoy();
+    String enviarSMSPadres(List<Alumno> alumnoList);
+    List<AlumnoResponseDTO> buscarPorIdUser(Long iduser);
+}

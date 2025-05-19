@@ -1,0 +1,38 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: msvc-alumnos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bdasistencia
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+
+  web:
+    resources:
+      static-locations: file:${user.dir}/microservice.alumnos/media/
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    server-url:
+      defaultZone: http://localhost:8761/eureka
+media:
+  location: ${user.dir}/microservice.alumnos/media
+account:
+  sid: ACa31e4b6645fd352cf467222413bfca45
+auth:
+  token: 2a6f4fee74f06217b5f6b7616fbc8c04
