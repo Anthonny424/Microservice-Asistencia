@@ -6,7 +6,7 @@ spring:
     name: msvc-alumnos
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bdasistencia
+    url: ${BD_URL}
     username: root
     password:
   jpa:
@@ -33,6 +33,6 @@ eureka:
 media:
   location: ${user.dir}/microservice.alumnos/media
 account:
-  sid: ACa31e4b6645fd352cf467222413bfca45
+  sid: ${SID_TWILIO}
 auth:
-  token: 2a6f4fee74f06217b5f6b7616fbc8c04
+  token: ${AUTH_TWILIO}
