@@ -2,9 +2,6 @@ package com.microservice.alumnos.controller;
 
 import com.microservice.alumnos.dto.request.*;
 import com.microservice.alumnos.dto.response.*;
-import com.microservice.alumnos.model.Alumno;
-import com.microservice.alumnos.model.Padre;
-import com.microservice.alumnos.model.Profesor;
 import com.microservice.alumnos.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -19,10 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -65,15 +60,6 @@ public class UserController {
     @Autowired
     private MatriculaServiceImpl matriculaService;
 
-
-//    LOGIM (FALTA)
-
-//    NavAdmin:
-//    Asistencia General (ALR)
-//    Matricular Alumnos (ALR)
-//    Insertar profesor (ALR)
-//    Insertar curso (listar profesores y listar grado) ARL
-//    LogOut (FALTA)
 
     @GetMapping("/asistencia/{dni}")
     public ResponseEntity<AlumnoResponseDTO> registrarAsistencia(@PathVariable int dni) throws IOException, URISyntaxException {
@@ -135,19 +121,9 @@ public class UserController {
 
 
 
-
 //    NavProfesor:
 //    Perfil
 //    AsistenciaCurso
-//    LogOut
-
-
-
-
-//    NavPadre:
-//    Perfil /YA=
-//    Reportes (FALTA)
-//    Alumnos (YA)
 //    LogOut
 
 
@@ -156,7 +132,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(padreService.buscarPorId(iduser));
     }
 
-    @PostMapping("/updatePadre")
+    @PutMapping("/updatePadre")
     public ResponseEntity<?> actualizarapadre(@RequestBody PadreCreateDTO padreCreateDTO){
         padreService.actualizarPadre(padreCreateDTO);
         return ResponseEntity.status(HttpStatus.OK).body("Updated!");
