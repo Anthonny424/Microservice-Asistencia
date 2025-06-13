@@ -12,11 +12,21 @@
         <module name="microservice.config" />
         <module name="microservice.gateway" />
       </profile>
+      <profile name="Annotation profile for AsistenciaMicroservice" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="microservice.auth" />
+      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="microservice.alumnos" options="-parameters" />
+      <module name="microservice.auth" options="-parameters" />
       <module name="microservice.config" options="-parameters" />
       <module name="microservice.eureka" options="-parameters" />
       <module name="microservice.gateway" options="-parameters" />

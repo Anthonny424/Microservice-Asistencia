@@ -20,6 +20,7 @@
     <module>microservice.eureka</module>
     <module>microservice.config</module>
     <module>microservice.alumnos</module>
+    <module>microservice.auth</module>
   </modules>
 
   <properties>

@@ -1,5 +1,3 @@
-server:
-  port: 8080
 spring:
   application:
     name: msvc-gateway
@@ -9,16 +7,27 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: alumnos
+        - id: alumnos-user
           uri: http://localhost:8090
           predicates:
-            - Path=/api/v1/**
-        - id: media
+            - Path=/api/user/**
+
+        - id: alumnos-admin
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/admin/**
+
+        - id: alumnos-media
           uri: http://localhost:8090
           predicates:
             - Path=/media/**
+
+        - id: alumnos-profe
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/profe/**
+
         - id: auth
           uri: http://localhost:9090
           predicates:
             - Path=/api/auth/**
-

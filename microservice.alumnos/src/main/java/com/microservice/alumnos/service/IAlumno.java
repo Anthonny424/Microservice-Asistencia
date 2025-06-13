@@ -1,8 +1,10 @@
 package com.microservice.alumnos.service;
 
-import com.microservice.alumnos.dto.request.AlumnoCreateDTO;
+
 import com.microservice.alumnos.dto.response.AlumnoResponseDTO;
+import com.microservice.alumnos.dto.response.CredencialesDTO;
 import com.microservice.alumnos.model.Alumno;
+
 
 import java.util.List;
 

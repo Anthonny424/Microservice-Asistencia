@@ -2,13 +2,12 @@ package com.microservice.alumnos.service;
 
 import com.microservice.alumnos.dto.request.AlumnoCreateDTO;
 import com.microservice.alumnos.dto.request.MatriculaCreateDTO;
-import com.microservice.alumnos.model.Alumno;
-import com.microservice.alumnos.model.Matricula;
-import com.microservice.alumnos.model.Padre;
-import com.microservice.alumnos.model.Usuario;
+import com.microservice.alumnos.dto.response.CredencialesDTO;
+import com.microservice.alumnos.model.*;
 import com.microservice.alumnos.repository.AlumnoRepository;
 import com.microservice.alumnos.repository.MatriculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Year;
@@ -29,11 +28,19 @@ public class MatriculaServiceImpl implements IMatricula{
     @Autowired
     private AlumnoServiceImpl alumnoService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
-    public void matricular(MatriculaCreateDTO matriculaCreateDTO, String foto, String qr) {
+    public CredencialesDTO matricular(MatriculaCreateDTO matriculaCreateDTO, String foto, String qr) {
+
+        CredencialesDTO credencialesDTO = new CredencialesDTO();
+        String contraseñagenerada = passwordGeneratorService.generarContraseñaAleatoria();
+
         Usuario usuario = new Usuario();
         usuario.setCorreo(matriculaCreateDTO.getAlumnoCreateDTO().getPadreCreateDTO().getUserCreateDTO().getCorreo());
-        usuario.setContraseña(passwordGeneratorService.generarContraseñaAleatoria());
+        usuario.setContraseña(passwordEncoder.encode(contraseñagenerada));
+        usuario.setRol(Rol.ROLE_USER);
 
         Padre padre = new Padre();
         padre.setNombre(matriculaCreateDTO.getAlumnoCreateDTO().getPadreCreateDTO().getNombre());
@@ -60,6 +67,9 @@ public class MatriculaServiceImpl implements IMatricula{
         matricula.setAlumno(alumno);
 
         matriculaRepository.save(matricula);
+        credencialesDTO.setCorreo(usuario.getCorreo());
+        credencialesDTO.setContraseña(contraseñagenerada);
+        return credencialesDTO;
     }
 
 }

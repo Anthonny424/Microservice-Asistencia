@@ -14,6 +14,8 @@ public class Usuario {
     @Column(unique = true)
     private String correo;
     private String contraseña;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
 
 }

@@ -3,9 +3,11 @@ package com.microservice.alumnos.service;
 import com.microservice.alumnos.dto.request.PadreCreateDTO;
 import com.microservice.alumnos.dto.request.UserCreateDTO;
 import com.microservice.alumnos.model.Padre;
+import com.microservice.alumnos.model.Rol;
 import com.microservice.alumnos.model.Usuario;
 import com.microservice.alumnos.repository.PadreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +15,9 @@ public class PadreServiceImpl implements IPadre{
 
     @Autowired
     private PadreRepository padreRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public PadreCreateDTO buscarPorId(Long id) {
@@ -39,7 +44,8 @@ public class PadreServiceImpl implements IPadre{
         Usuario usuario = new Usuario();
         usuario.setIduser(padreActualizado.getUsuario().getIduser());
         usuario.setCorreo(padreCreateDTO.getUserCreateDTO().getCorreo());
-        usuario.setContraseña(padreCreateDTO.getUserCreateDTO().getContraseña());
+        usuario.setContraseña(passwordEncoder.encode(padreCreateDTO.getUserCreateDTO().getContraseña()));
+        usuario.setRol(Rol.ROLE_USER);
 
         padreActualizado.setUsuario(usuario);
         padreRepository.save(padreActualizado);

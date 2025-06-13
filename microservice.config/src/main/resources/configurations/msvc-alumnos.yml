@@ -36,3 +36,6 @@ account:
   sid: ${SID_TWILIO}
 auth:
   token: ${AUTH_TWILIO}
+security:
+  key:
+    private: ${KEY_PRIVATE}

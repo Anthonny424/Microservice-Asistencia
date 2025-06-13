@@ -1,0 +1,29 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: msvc-auth
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${BD_URL}
+    username: ${BD_USER}
+    password: ${BD_PASS}
+    jpa:
+      hibernate:
+        ddl-auto: update
+      database: mysql
+      database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  eureka:
+    instance:
+      hostname: localhost
+    client:
+      server-url:
+        defaultZone: http://localhost:8761/eureka
+security:
+  key:
+    private: ${KEY_PRIVATE}
+  user:
+    generator: ${USER_JWT}

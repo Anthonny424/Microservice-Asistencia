@@ -2,6 +2,7 @@ package com.microservice.alumnos.service;
 
 
 import com.microservice.alumnos.dto.response.AlumnoResponseDTO;
+import com.microservice.alumnos.dto.response.CredencialesDTO;
 import com.microservice.alumnos.model.Alumno;
 import com.microservice.alumnos.repository.AlumnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +73,6 @@ public class AlumnoServiceImpl implements IAlumno{
         }
         return hijosDTO;
     }
+
 
 }
