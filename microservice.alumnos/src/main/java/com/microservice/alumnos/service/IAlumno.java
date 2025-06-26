@@ -14,4 +14,6 @@ public interface IAlumno {
     List<Alumno> alumnosquefaltaronhoy();
     String enviarSMSPadres(List<Alumno> alumnoList);
     List<AlumnoResponseDTO> buscarPorIdUser(Long iduser);
+    List<AlumnoResponseDTO> buscarPorCurso(Long idcurso);
+    Alumno buscarPorId(Long idalumno);
 }

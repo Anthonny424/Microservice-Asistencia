@@ -24,6 +24,4 @@ public class Matricula {
     @ManyToOne
     @JoinColumn(name = "idgrado")
     private Grado grado;
-
-
 }

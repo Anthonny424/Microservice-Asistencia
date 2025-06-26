@@ -31,6 +31,9 @@ public class MatriculaServiceImpl implements IMatricula{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private SmsSenderService smsSenderService;
+
     @Override
     public CredencialesDTO matricular(MatriculaCreateDTO matriculaCreateDTO, String foto, String qr) {
 
@@ -69,6 +72,8 @@ public class MatriculaServiceImpl implements IMatricula{
         matriculaRepository.save(matricula);
         credencialesDTO.setCorreo(usuario.getCorreo());
         credencialesDTO.setContraseña(contraseñagenerada);
+        smsSenderService.sendMessage("+51"+padre.getTelefono(), "Bienvenido al sistema "+padre.getNombre()+" "+padre.getApellido()+". " +
+                "Sus credenciales son: "+usuario.getCorreo()+" / "+contraseñagenerada+". Recuerde que debe cambiar sus contraseña");
         return credencialesDTO;
     }
 

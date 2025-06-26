@@ -51,7 +51,7 @@ public class AlumnoServiceImpl implements IAlumno{
     }
 
     public String enviarSMSPadres(List<Alumno> alumnosquefaltaron){
-        alumnosquefaltaron.stream().forEach(alumno ->  smsSenderService.sendMessage(String.valueOf("+" + alumno.getPadre().getTelefono()),
+        alumnosquefaltaron.stream().forEach(alumno ->  smsSenderService.sendMessage(String.valueOf("+51" + alumno.getPadre().getTelefono()),
                 "Notificación: Su hijo "+ alumno.getNombre() + " " + alumno.getApellido() + " ha faltado HOY. ¿Usted sabe sobre su falta?"));
         return "Alerta enviada!";
     }
@@ -72,6 +72,25 @@ public class AlumnoServiceImpl implements IAlumno{
             hijosDTO.add(alumnoResponseDTO);
         }
         return hijosDTO;
+    }
+
+    @Override
+    public List<AlumnoResponseDTO> buscarPorCurso(Long idcurso) {
+        List<AlumnoResponseDTO> lista = new ArrayList<>();
+        List<Alumno> alumnos = repository.obtenerAlumnosPorCurso(idcurso);
+        for (Alumno x: alumnos){
+            AlumnoResponseDTO alumnoResponseDTO = new AlumnoResponseDTO();
+            alumnoResponseDTO.setIdalumno(x.getIdalumno());
+            alumnoResponseDTO.setNombre(x.getNombre());
+            alumnoResponseDTO.setApellido(x.getApellido());
+            lista.add(alumnoResponseDTO);
+        }
+        return lista;
+    }
+
+    @Override
+    public Alumno buscarPorId(Long idalumno) {
+        return repository.findById(idalumno).get();
     }
 
 

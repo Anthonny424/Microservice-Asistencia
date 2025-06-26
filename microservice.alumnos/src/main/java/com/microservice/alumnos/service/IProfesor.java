@@ -11,5 +11,8 @@ public interface IProfesor {
     Profesor findById(Long id);
     void crearProfesor(ProfesorCreateDTO profesorCreateDTO);
     List<ProfesorResponseDTO> listarProfesores();
+    ProfesorCreateDTO buscarporiduser(Long iduser);
+    Long buscaridprofesor (Long iduser);
+    void actualizarProfesor(ProfesorCreateDTO profesorCreateDTO);
 
 }

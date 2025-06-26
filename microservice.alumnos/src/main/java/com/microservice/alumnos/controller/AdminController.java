@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -61,9 +62,13 @@ public class AdminController {
 
 
     @GetMapping("/asistencia/{dni}")
-    public ResponseEntity<AlumnoResponseDTO> registrarAsistencia(@PathVariable int dni) throws IOException, URISyntaxException {
-        AlumnoResponseDTO alumnoResponseDTO = asistenciaService.registrarAsistencia(dni);
-        return ResponseEntity.status(HttpStatus.OK).body(alumnoResponseDTO);
+    public ResponseEntity<?> registrarAsistencia(@PathVariable int dni) throws IOException, URISyntaxException {
+        try {
+            AlumnoResponseDTO dto = asistenciaService.registrarAsistencia(dni);
+            return ResponseEntity.ok(dto);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("mensaje", e.getMessage()));
+        }
     }
 
     @GetMapping("/cerrarAsistencias")

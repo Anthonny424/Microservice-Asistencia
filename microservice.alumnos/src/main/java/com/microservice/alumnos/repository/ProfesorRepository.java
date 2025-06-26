@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProfesorRepository extends JpaRepository<Profesor, Long> {
+    Profesor findByUsuarioIduser(Long iduser);
+    Profesor findByDni(int dni);
 }

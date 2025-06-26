@@ -4,6 +4,8 @@ package com.microservice.alumnos.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 
 
@@ -14,6 +16,9 @@ public class AsistenciaCurso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idasistenciacurso;
     private String estado;
+
+    @Column(name = "fecha_asistencia")
+    private Date fechaAsistencia;
 
     @ManyToOne
     @JoinColumn(name = "idalumno")
